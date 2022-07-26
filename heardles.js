@@ -43,6 +43,11 @@ const createHeardleBox = ( [ name , href ] ) => {
 	row.addEventListener( 'mousedown' , () => {
 		localStorage[ lsKey ] = Date.now();
 		checkbox.textContent = '\u2611\uFE0F';
+
+		if ( event.button === 0 ) {
+			event.preventDefault();
+			window.open( href );
+		}
 	} );
 
 	return row;
