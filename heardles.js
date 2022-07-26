@@ -21,27 +21,38 @@ const gResetTime = ( () => {
 
 const createHeardleBox = ( [ name , href ] ) => {
 	const lsKey = `heardle-${name}`
+	let info = JSON.parse( localStorage[ lsKey ] ?? '{}');
+	if ( typeof info === 'number' ) {
+		info = { lastAttemptTime: info };
+		localStorage[ lsKey ] = JSON.stringify( info );
+	}
 
-	const row = document.createElement( 'a' );
-	row.href = href;
+	const { lastAttemptTime , success } = info;
+	const lastAttempt = new Date( lastAttemptTime ?? 0 );
+
+	const row = document.createElement( 'div' );
 	row.classList.add( 'row' );
 
-	const link = document.createElement( 'div' );
-	link.textContent = name;
+	const link = document.createElement( 'a' );
+	link.href = href;
 	link.classList.add( 'link' );
 
-	const lastAttmeptTime = parseInt( localStorage[ lsKey ] ?? '0' );
-	const lastAttempt = new Date( lastAttmeptTime );
+	const text = document.createElement( 'div' );
+	text.textContent = name;
+	text.classList.add( 'text' );
 
 	const checkbox = document.createElement( 'div' );
 	checkbox.classList.add( 'checkbox' );
 	checkbox.textContent = lastAttempt < gResetTime ? '\u274C' : '\u2611\uFE0F';
 
-	row.appendChild( checkbox );
-	row.appendChild( link );
+	link.appendChild( checkbox );
+	link.appendChild( text );
 
-	row.addEventListener( 'mousedown' , () => {
-		localStorage[ lsKey ] = Date.now();
+	link.addEventListener( 'mousedown' , () => {
+		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
+		info.lastAttemptTime = Date.now();;
+		localStorage[ lsKey ] = JSON.stringify( info );
+
 		checkbox.textContent = '\u2611\uFE0F';
 
 		if ( event.button === 0 ) {
@@ -49,6 +60,41 @@ const createHeardleBox = ( [ name , href ] ) => {
 			window.open( href );
 		}
 	} );
+
+	const toggle = document.createElement( 'div' );
+	toggle.classList.add( 'toggle' );
+	if ( lastAttempt >= gResetTime && success != null ) {
+		toggle.classList.add( success ? 'right' : 'wrong' );
+	}
+
+	const right = document.createElement( 'div' );
+	right.classList.add( 'right-side' );
+	right.textContent = 'right';
+	right.addEventListener( 'click' , () => {
+		toggle.classList.add( 'right' );
+		toggle.classList.remove( 'wrong' );
+		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
+		info.success = true;
+		localStorage[ lsKey ] = JSON.stringify( info );
+	} );
+
+	const wrong = document.createElement( 'div' );
+	wrong.classList.add( 'wrong-side' );
+	wrong.textContent = 'wrong';
+	wrong.addEventListener( 'click' , () => {
+		toggle.classList.add( 'wrong' );
+		toggle.classList.remove( 'right' );
+		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
+		info.success = false;
+		localStorage[ lsKey ] = JSON.stringify( info );
+	} );
+
+	toggle.appendChild( right )
+	toggle.appendChild( wrong );
+
+	row.appendChild( link )
+	row.appendChild( toggle );
+
 
 	return row;
 };

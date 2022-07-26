@@ -26,26 +26,81 @@
 				display: flex;
 				flex-flow: row nowrap;
 				padding: 10px;
-				width: 300px;
+				/* width: 300px; */
 				margin: 2px;
+				align-items: center;
 			}
 
-			#list .row:hover {
+			#list .row .link:hover {
 				background: #1f4f9f;
 			}
 
 			.row > * {
-				margin: 10px;
-				flex: 1 1 0;
-			}
-
-			.row > .checkbox {
-				flex: 0 0 auto;
+				/* flex: 1 1 0; */
 			}
 
 			.row > .link {
+				margin: 0 25px;
+				display: flex;
+				flex-flow: row nowrap;
 				color: white;
 				line-height: 33px;
+				width: 200px;
+			}
+
+			.link > * {
+				margin: 10px;
+			}
+
+			.link > .checkbox {
+				flex: 0 0 auto;
+			}
+
+			.toggle {
+				height: 24px;
+				display: flex;
+				flex-flow: row nowrap;
+				border-radius: 5px;
+				border: 1px groove white;
+				padding: 0px;
+				/* align-items: stretch; */
+				cursor: pointer;
+			}
+
+			.toggle > * {
+				font-size: 16px;
+				padding: 5px;
+				/* border-radius: 5px; */
+				border: 2px solid white;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: center;
+			}
+
+			.toggle .right-side {
+				border-style: outset;
+				background: #000f00;
+			}
+
+			.toggle .right-side:hover {
+				background: #007f00
+			}
+
+			.toggle .wrong-side {
+				border-style: inset;
+				background: #0f0000;
+			}
+
+			.toggle .wrong-side:hover {
+				background: #7f0000
+			}
+
+			.toggle.right .right-side {
+				background: #007f00;
+			}
+
+			.toggle.wrong .wrong-side {
+				background: #7f0000;
 			}
 		</style>
 	</head>
