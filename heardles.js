@@ -1,12 +1,13 @@
 const heardles = [
-	[ 'Original'    ,  'https://www.spotify.com/heardle/'  ],
-	[ '60s'         ,  'https://www.60s.heardledecades.com/'  ],
-	[ '70s'         ,  'https://www.70s.heardledecades.com/'  ],
-	[ '80s'         ,  'https://heardle80s.com/'  ],
-	[ '80s #1s'     ,  'https://www.80s.heardledecades.com/'  ],
-	[ '90s'         ,  'https://www.90s.heardledecades.com/'  ],
-	[ '2000s'       ,  'https://2000sheardle.glitch.me/'  ],
-	[ 'Pop'         ,  'https://popheardle.glitch.me/'  ],
+	[ 'Original'     ,  'https://www.spotify.com/heardle/' ],
+	[ '60s'          ,  'https://www.60s.heardledecades.com/' ],
+	[ '70s'          ,  'https://www.70s.heardledecades.com/' ],
+	[ '80s'          ,  'https://heardle80s.com/' ],
+	[ '80s #1s'      ,  'https://www.80s.heardledecades.com/' ],
+	[ '90s'          ,  'https://www.90s.heardledecades.com/' ],
+	[ '2000s'        ,  'https://2000sheardle.glitch.me/' ],
+	[ 'Pop'          ,  'https://popheardle.glitch.me/' ],
+	[ 'Rhythm Games' ,  'https://rhythmgame-heardle.glitch.me/' ],
 ];
 
 const gResetTime = ( () => {
