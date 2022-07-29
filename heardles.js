@@ -102,3 +102,14 @@ const createHeardleBox = ( [ name , href ] ) => {
 
 const list = document.querySelector( '#list' );
 heardles.map( createHeardleBox ).forEach( li => list.appendChild( li ) );
+
+const ssButton = document.querySelector( '#screenshot' );
+ssButton.addEventListener( 'click' , () => {
+	html2canvas( list ).then( canvas => {
+	    // document.body.appendChild( canvas );
+	    canvas.toBlob( blob => { 
+		    const item = new ClipboardItem( { "image/png": blob } );
+		    navigator.clipboard.write( [ item ] ); 
+		} );
+	} );
+} );

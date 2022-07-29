@@ -4,8 +4,8 @@
 		<title>Heardles</title>
 		<style>
 			html , body {
-				background: black;
-				color: white;
+				background: #0f0f0f;
+				color: #ffffff;
 				font-size: 24px;
 				min-width: 100vw;
 				min-height: 100vh;
@@ -15,18 +15,40 @@
 
 			a { text-decoration: none; }
 
+			#screenshot {
+				background: #2f2f2f;
+				border-radius: 20px;
+				border: 3px outset #afafaf;
+				color: #ffffff;
+				display: block;
+				font-size: 18px;
+				line-height: 24px;
+				margin: 0px auto 5px;
+				position: relative;
+				top: 10px;
+				width: 160px;
+			}
+
+			#screenshot:hover {
+				background: #8f8f8f;
+				border-color: #3f3f3f;
+				color: #3f5f9f;
+				cursor: pointer;
+			}
+
 			#list {
+				background: #0f0f0f;
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+				width: 410px;
+				margin: auto;
 			}
 
 			#list .row {
-				/* border: 1px solid white; */
 				display: flex;
 				flex-flow: row nowrap;
 				padding: 10px;
-				/* width: 300px; */
 				margin: 2px;
 				align-items: center;
 			}
@@ -35,21 +57,17 @@
 				background: #1f4f9f;
 			}
 
-			.row > * {
-				/* flex: 1 1 0; */
-			}
-
 			.row > .link {
-				margin: 0 25px;
+				margin: 0 20px 0 0;
 				display: flex;
 				flex-flow: row nowrap;
-				color: white;
+				color: #ffffff;
 				line-height: 33px;
-				width: 200px;
+				width: 230px;
 			}
 
 			.link > * {
-				margin: 10px;
+				margin: 10px 5px;
 			}
 
 			.link > .checkbox {
@@ -61,17 +79,16 @@
 				display: flex;
 				flex-flow: row nowrap;
 				border-radius: 5px;
-				border: 1px groove white;
+				border: 1px groove #ffffff;
 				padding: 0px;
-				/* align-items: stretch; */
+				margin: 5px;
 				cursor: pointer;
 			}
 
 			.toggle > * {
 				font-size: 16px;
 				padding: 5px;
-				/* border-radius: 5px; */
-				border: 2px solid white;
+				border: 2px solid #ffffff;
 				display: flex;
 				flex-flow: column nowrap;
 				justify-content: center;
@@ -105,8 +122,10 @@
 		</style>
 	</head>
 	<body>
+		<button id="screenshot">Take Screenshot</button>
 		<div id="list">
 		</div>
 	</body>
+	<script src="./html2canvas.min.js" type="text/javascript"></script>
 	<script src="./heardles.js" type="text/javascript"></script>
 <html>
