@@ -93,8 +93,34 @@ const createHeardleBox = ( [ name , href ] ) => {
 	toggle.appendChild( right )
 	toggle.appendChild( wrong );
 
+	const guesses = document.createElement( 'div' );
+	guesses.classList.add( 'guesses' );
+
+	for ( let i = 1 ; i <= 7 ; i++ ) {
+		const guess = document.createElement( 'div' );
+		guess.classList.add( 'guess' );
+		guess.addEventListener( 'click' , event => {
+			let beforeMarked = true;
+			for ( const child of guesses.children ) {
+				child.classList.remove( 'wrong' );
+				child.classList.remove( 'correct' );
+				if ( i === 7 ) {
+					child.classList.add( 'wrong' );
+				} else if ( child === guess ) {
+					beforeMarked = false;
+					child.classList.add( 'correct' );
+				} else if ( beforeMarked ) {
+					child.classList.add( 'wrong' );
+				}
+			}
+		} );
+
+		guesses.appendChild( guess );
+	}
+
 	row.appendChild( link )
-	row.appendChild( toggle );
+	// row.appendChild( toggle );
+	row.appendChild( guesses );
 
 
 	return row;
