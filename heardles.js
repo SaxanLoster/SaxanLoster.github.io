@@ -100,6 +100,10 @@ const createHeardleBox = ( [ name , href ] ) => {
 		const guess = document.createElement( 'div' );
 		guess.classList.add( 'guess' );
 		guess.addEventListener( 'click' , event => {
+			const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
+			info.guesses = i;
+			localStorage[ lsKey ] = JSON.stringify( info );
+
 			let beforeMarked = true;
 			for ( const child of guesses.children ) {
 				child.classList.remove( 'wrong' );
@@ -116,6 +120,18 @@ const createHeardleBox = ( [ name , href ] ) => {
 		} );
 
 		guesses.appendChild( guess );
+	}
+
+	if ( info.guesses != null ) {
+		for ( let i = 0 ; i < guesses.children.length ; i++ ) {
+			if ( i < info.guesses - 1 || i === 6 ) {
+				guesses.children[ i ].classList.add( 'wrong' );
+			} else if ( i === info.guesses - 1 ) {
+				guesses.children[ i ].classList.add( 'correct' );
+			} else {
+				break;
+			}
+		}
 	}
 
 	row.appendChild( link )
