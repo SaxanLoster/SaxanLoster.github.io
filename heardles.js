@@ -96,7 +96,7 @@ const createHeardleBox = ( [ name , href ] ) => {
 	const guesses = document.createElement( 'div' );
 	guesses.classList.add( 'guesses' );
 
-	for ( let i = 1 ; i <= 7 ; i++ ) {
+	for ( let i = 0 ; i < 7 ; i++ ) {
 		const guess = document.createElement( 'div' );
 		guess.classList.add( 'guess' );
 		guess.addEventListener( 'click' , event => {
@@ -108,7 +108,7 @@ const createHeardleBox = ( [ name , href ] ) => {
 			for ( const child of guesses.children ) {
 				child.classList.remove( 'wrong' );
 				child.classList.remove( 'correct' );
-				if ( i === 7 ) {
+				if ( i === 6 ) {
 					child.classList.add( 'wrong' );
 				} else if ( child === guess ) {
 					beforeMarked = false;
@@ -122,11 +122,11 @@ const createHeardleBox = ( [ name , href ] ) => {
 		guesses.appendChild( guess );
 	}
 
-	if ( info.guesses != null ) {
+	if ( lastAttempt >= gResetTime && info.guesses != null ) {
 		for ( let i = 0 ; i < guesses.children.length ; i++ ) {
-			if ( i < info.guesses - 1 || i === 6 ) {
+			if ( i < info.guesses || i === 6 ) {
 				guesses.children[ i ].classList.add( 'wrong' );
-			} else if ( i === info.guesses - 1 ) {
+			} else if ( i === info.guesses ) {
 				guesses.children[ i ].classList.add( 'correct' );
 			} else {
 				break;
