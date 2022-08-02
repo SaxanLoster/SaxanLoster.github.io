@@ -46,7 +46,7 @@ const createHeardleBox = ( [ name , href ] ) => {
 	checkbox.classList.add( 'checkbox' );
 	checkbox.textContent = lastAttempt < gResetTime ? '\u274C' : '\u2611\uFE0F';
 
-	link.appendChild( checkbox );
+	// link.appendChild( checkbox );
 	link.appendChild( text );
 
 	link.addEventListener( 'mousedown' , () => {
@@ -155,3 +155,6 @@ ssButton.addEventListener( 'click' , () => {
 		} );
 	} );
 } );
+
+const date = document.querySelector( '#date' );
+date.textContent = new Date().toDateString();
