@@ -61,8 +61,12 @@ const xCreateHeardleBox = ( [ name , href ] ) => {
 		localStorage[ lsKey ] = JSON.stringify( info );
 	}
 
-	const { lastAttemptTime , success } = info;
+	const { lastAttemptTime } = info;
 	const lastAttempt = new Date( lastAttemptTime ?? 0 );
+
+	if ( lastAttempt < gResetTime ) {
+		localStorage[ lsKey ] = JSON.stringify( { lastAttemptTime: lastAttempt.getTime() } )
+	}
 
 	const row = document.createElement( 'div' );
 	row.classList.add( 'row' );
@@ -79,7 +83,7 @@ const xCreateHeardleBox = ( [ name , href ] ) => {
 
 	link.addEventListener( 'mousedown' , () => {
 		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
-		info.lastAttemptTime = Date.now();;
+		info.lastAttemptTime = Date.now();
 		localStorage[ lsKey ] = JSON.stringify( info );
 
 		if ( event.button === 0 ) {
