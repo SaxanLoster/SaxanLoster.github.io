@@ -10,6 +10,22 @@ const heardles = [
 	[ 'Rhythm Games' ,  'https://rhythmgame-heardle.glitch.me/' ],
 ];
 
+const list = document.querySelector( '#list' );
+const screenshotButton = document.querySelector( '#screenshot' );
+
+screenshotButton.addEventListener( 'click' , () => {
+	html2canvas( list ).then( canvas => {
+	    // document.body.appendChild( canvas );
+	    canvas.toBlob( blob => { 
+		    const item = new ClipboardItem( { "image/png": blob } );
+		    navigator.clipboard.write( [ item ] ); 
+		} );
+	} );
+} );
+
+const date = document.querySelector( '#date' );
+date.textContent = `0/0 - ${new Date().toDateString()}`;
+
 const gResetTime = ( () => {
 	let now = new Date();
 	now.setHours( 0 );
@@ -20,7 +36,24 @@ const gResetTime = ( () => {
 	return now.getTime();
 } )();
 
-const createHeardleBox = ( [ name , href ] ) => {
+const xCalcCorrectAnswers = () => {
+	const [ total , right ] = heardles.map( ( [ title ] ) => {
+		const saved = JSON.parse( localStorage[ `heardle-${title}` ] ?? `{}` );
+		if ( saved.lastAttemptTime >= gResetTime ) return saved.guesses;
+		return null;
+	} ).reduce( ( obj , num ) => {
+		if ( num == null ) return obj;
+
+		obj[ 0 ]++;
+		if ( num < 6 ) obj[ 1 ]++;
+
+		return obj;
+	} , [ 0 , 0 ] );
+
+	date.textContent = `${right}/${total} - ${new Date().toDateString()}`;
+};
+
+const xCreateHeardleBox = ( [ name , href ] ) => {
 	const lsKey = `heardle-${name}`
 	let info = JSON.parse( localStorage[ lsKey ] ?? '{}');
 	if ( typeof info === 'number' ) {
@@ -42,11 +75,6 @@ const createHeardleBox = ( [ name , href ] ) => {
 	text.textContent = name;
 	text.classList.add( 'text' );
 
-	const checkbox = document.createElement( 'div' );
-	checkbox.classList.add( 'checkbox' );
-	checkbox.textContent = lastAttempt < gResetTime ? '\u274C' : '\u2611\uFE0F';
-
-	// link.appendChild( checkbox );
 	link.appendChild( text );
 
 	link.addEventListener( 'mousedown' , () => {
@@ -62,37 +90,6 @@ const createHeardleBox = ( [ name , href ] ) => {
 		}
 	} );
 
-	const toggle = document.createElement( 'div' );
-	toggle.classList.add( 'toggle' );
-	if ( lastAttempt >= gResetTime && success != null ) {
-		toggle.classList.add( success ? 'right' : 'wrong' );
-	}
-
-	const right = document.createElement( 'div' );
-	right.classList.add( 'right-side' );
-	right.textContent = 'right';
-	right.addEventListener( 'click' , () => {
-		toggle.classList.add( 'right' );
-		toggle.classList.remove( 'wrong' );
-		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
-		info.success = true;
-		localStorage[ lsKey ] = JSON.stringify( info );
-	} );
-
-	const wrong = document.createElement( 'div' );
-	wrong.classList.add( 'wrong-side' );
-	wrong.textContent = 'wrong';
-	wrong.addEventListener( 'click' , () => {
-		toggle.classList.add( 'wrong' );
-		toggle.classList.remove( 'right' );
-		const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
-		info.success = false;
-		localStorage[ lsKey ] = JSON.stringify( info );
-	} );
-
-	toggle.appendChild( right )
-	toggle.appendChild( wrong );
-
 	const guesses = document.createElement( 'div' );
 	guesses.classList.add( 'guesses' );
 
@@ -102,6 +99,7 @@ const createHeardleBox = ( [ name , href ] ) => {
 		guess.addEventListener( 'click' , event => {
 			const info = JSON.parse( localStorage[ lsKey ] ?? '{}' );
 			info.guesses = i;
+			info.lastAttemptTime = Date.now();
 			localStorage[ lsKey ] = JSON.stringify( info );
 
 			let beforeMarked = true;
@@ -117,6 +115,8 @@ const createHeardleBox = ( [ name , href ] ) => {
 					child.classList.add( 'wrong' );
 				}
 			}
+
+			xCalcCorrectAnswers();
 		} );
 
 		guesses.appendChild( guess );
@@ -128,33 +128,19 @@ const createHeardleBox = ( [ name , href ] ) => {
 				guesses.children[ i ].classList.add( 'wrong' );
 			} else if ( i === info.guesses ) {
 				guesses.children[ i ].classList.add( 'correct' );
+				break;
 			} else {
 				break;
 			}
 		}
 	}
 
-	row.appendChild( link )
-	// row.appendChild( toggle );
-	row.appendChild( guesses );
+	xCalcCorrectAnswers();
 
+	row.appendChild( link )
+	row.appendChild( guesses );
 
 	return row;
 };
 
-const list = document.querySelector( '#list' );
-heardles.map( createHeardleBox ).forEach( li => list.appendChild( li ) );
-
-const ssButton = document.querySelector( '#screenshot' );
-ssButton.addEventListener( 'click' , () => {
-	html2canvas( list ).then( canvas => {
-	    // document.body.appendChild( canvas );
-	    canvas.toBlob( blob => { 
-		    const item = new ClipboardItem( { "image/png": blob } );
-		    navigator.clipboard.write( [ item ] ); 
-		} );
-	} );
-} );
-
-const date = document.querySelector( '#date' );
-date.textContent = new Date().toDateString();
+heardles.map( xCreateHeardleBox ).forEach( li => list.appendChild( li ) );
