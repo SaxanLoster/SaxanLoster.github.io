@@ -82,8 +82,6 @@ const xCreateHeardleBox = ( [ name , href ] ) => {
 		info.lastAttemptTime = Date.now();;
 		localStorage[ lsKey ] = JSON.stringify( info );
 
-		checkbox.textContent = '\u2611\uFE0F';
-
 		if ( event.button === 0 ) {
 			event.preventDefault();
 			window.open( href );
