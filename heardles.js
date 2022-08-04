@@ -14,11 +14,26 @@ const list = document.querySelector( '#list' );
 const screenshotButton = document.querySelector( '#screenshot' );
 
 screenshotButton.addEventListener( 'click' , () => {
+	[].forEach.call( list.children , child => {
+		if ( child.id === 'date' ) return;
+
+		const key = child.firstChild.textContent;
+		const info = JSON.parse( localStorage[ `heardle-${key}` ] || '{}' );
+
+		if ( info.guesses == null ) {
+			child.style.display = 'none';
+		}
+	} );
+
 	html2canvas( list ).then( canvas => {
 	    // document.body.appendChild( canvas );
 	    canvas.toBlob( blob => { 
 		    const item = new ClipboardItem( { "image/png": blob } );
 		    navigator.clipboard.write( [ item ] ); 
+		} );
+
+		[].forEach.call( list.children , child => {
+			child.removeAttribute( 'style' );
 		} );
 	} );
 } );
