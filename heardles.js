@@ -5,9 +5,13 @@ const heardles = [
 	[ '80s' , 'https://heardle80s.com/' ],
 	[ '80s #1s' , 'https://www.80s.heardledecades.com/' ],
 	[ '90s' , 'https://www.90s.heardledecades.com/' ],
+	[ '90s US' , 'https://us90s-heardle.glitch.me/' ],
 	[ '90s R&B/Hip-Hop' , 'https://ya-heardle.glitch.me/' ],
 	[ '2000s' , 'https://2000sheardle.glitch.me/' ],
 	[ 'Pop' , 'https://popheardle.glitch.me/' ],
+	[ 'Rock' , 'https://bestestes-rock-heardle.glitch.me/' ],
+	[ 'Green Day' , 'https://green-day-heardle.glitch.me/' ],
+	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
 	[ 'Rhythm Games' , 'https://rhythmgame-heardle.glitch.me/' ],
 ];
 
