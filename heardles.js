@@ -10,6 +10,7 @@ const heardles = [
 	[ '2000s' , 'https://2000sheardle.glitch.me/' ],
 	[ 'Pop' , 'https://popheardle.glitch.me/' ],
 	[ 'Rock' , 'https://bestestes-rock-heardle.glitch.me/' ],
+	[ 'Disney' , 'https://disney-heardle.glitch.me/' ],
 	[ 'Green Day' , 'https://green-day-heardle.glitch.me/' ],
 	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
 	[ 'Rhythm Games' , 'https://rhythmgame-heardle.glitch.me/' ],
