@@ -14,6 +14,7 @@ const heardles = [
 	[ 'Green Day' , 'https://green-day-heardle.glitch.me/' ],
 	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
 	[ 'Rhythm Games' , 'https://rhythmgame-heardle.glitch.me/' ],
+	[ 'Lyrics' , 'https://www.lyricle.app/' ],
 ];
 
 const list = document.querySelector( '#list' );
