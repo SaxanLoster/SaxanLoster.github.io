@@ -1,20 +1,36 @@
 const heardles = [
 	[ 'Original' , 'https://www.spotify.com/heardle/' ],
+
 	[ '60s' , 'https://www.60s.heardledecades.com/' ],
 	[ '70s' , 'https://www.70s.heardledecades.com/' ],
 	[ '80s' , 'https://heardle80s.com/' ],
+	[ '80s 2nd' , 'https://like-its-the-80s-heardle.glitch.me/' ],
 	[ '80s #1s' , 'https://www.80s.heardledecades.com/' ],
 	[ '90s' , 'https://www.90s.heardledecades.com/' ],
-	[ '90s US' , 'https://us90s-heardle.glitch.me/' ],
+	[ '90s 2nd' , 'https://90s-heardle.glitch.me/' ],
 	[ '90s R&B/Hip-Hop' , 'https://ya-heardle.glitch.me/' ],
+	[ '90s US' , 'https://us90s-heardle.glitch.me/' ],
 	[ '2000s' , 'https://2000sheardle.glitch.me/' ],
-	[ 'Pop' , 'https://popheardle.glitch.me/' ],
-	[ 'Rock' , 'https://bestestes-rock-heardle.glitch.me/' ],
+	// [ '' , '' ],
+
+	[ 'Anime' , 'https://animle.app/' ],
 	// [ 'Disney' , 'https://disney-heardle.glitch.me/' ],
-	[ 'Green Day' , 'https://green-day-heardle.glitch.me/' ],
-	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
-	[ 'Rhythm Games' , 'https://rhythmgame-heardle.glitch.me/' ],
 	[ 'Lyrics' , 'https://www.lyricle.app/' ],
+	[ 'Movie/TV Themes' , 'https://themedle.com/' ],
+	[ 'Pop' , 'https://popheardle.glitch.me/' ],
+	[ 'Rhythm Games' , 'https://rhythmgame-heardle.glitch.me/' ],
+	[ 'Rock' , 'https://bestestes-rock-heardle.glitch.me/' ],
+	// [ '' , '' ],
+
+	[ 'Britney Spears' , 'https://britney-heardle.glitch.me/' ],
+	[ 'Boyz II Men' , 'https://boyziimen-heardle.glitch.me/' ],
+	[ 'Green Day' , 'https://green-day-heardle.glitch.me/' ],
+	[ 'Halsey' , 'https://halsey-heardle.glitch.me/' ],
+	[ 'Paramore' , 'https://paramore-heardle.glitch.me/' ],
+	[ 'Queen' , 'https://queenheardle.glitch.me/' ],
+	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
+	// [ '' , '' ],
+
 ];
 
 const list = document.querySelector( '#list' );
