@@ -39,12 +39,11 @@
 			#list {
 				background: #0f0f0f;
 				display: flex;
-				/* flex-flow: column nowrap; */
 				flex-flow: row wrap;
-				/* align-items: center; */
 				justify-content: center;
 				width: 100%;
 				margin: auto;
+				padding-bottom: 5px;
 				max-width: 1280px
 			}
 
@@ -55,10 +54,10 @@
 				text-align: center;
 			}
 
-			#list .row {
+			.row {
 				display: flex;
 				flex-flow: row nowrap;
-				padding: 10px;
+				padding: 10px 10px;
 				margin: 2px;
 				border: 1px dashed #3f3f3f;
 				align-items: center;
@@ -67,6 +66,24 @@
 
 			#list .row .link:hover {
 				background: #1f4f9f;
+			}
+
+			.row > .toggleHide {
+				background: #8f1f1f;
+				border-radius: 50px;
+				border: 2px outset white;
+				cursor: pointer;
+				font-size: 16px;
+				margin-right: 5px;
+				padding: 0px 5px;
+			}
+
+			.row.hidden > .toggleHide {
+				background: #1f8f1f;
+			}
+
+			#list.takingSS > .row > .toggleHide {
+				display: none;
 			}
 
 			.row > .link {
@@ -79,58 +96,16 @@
 				width: 200px;
 			}
 
-			.link > * {
+			.row.hidden > .link {
+				width: unset;
+			}
+
+			.row > .link > * {
 				margin: 10px 5px;
 			}
 
-			.link > .checkbox {
-				flex: 0 0 auto;
-			}
-
-			.toggle {
-				height: 24px;
-				display: flex;
-				flex-flow: row nowrap;
-				border-radius: 5px;
-				border: 1px groove #ffffff;
-				padding: 0px;
-				margin: 5px;
-				cursor: pointer;
-			}
-
-			.toggle > * {
-				font-size: 16px;
-				padding: 5px;
-				border: 2px solid #ffffff;
-				display: flex;
-				flex-flow: column nowrap;
-				justify-content: center;
-			}
-
-			.toggle .right-side {
-				border-style: outset;
-				background: #000f00;
-			}
-
-			.toggle .right-side:hover {
-				background: #007f00
-			}
-
-			.toggle .wrong-side {
-				border-style: inset;
-				background: #0f0000;
-			}
-
-			.toggle .wrong-side:hover {
-				background: #7f0000
-			}
-
-			.toggle.right .right-side {
-				background: #007f00;
-			}
-
-			.toggle.wrong .wrong-side {
-				background: #7f0000;
+			.row.hidden > .guesses {
+				display: none;
 			}
 
 			.guesses {
@@ -156,12 +131,37 @@
 			.guess.correct {
 				background: #007f00;
 			}
+
+			#ignored {
+				background: #0f0f0f;
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: left;
+				width: 100%;
+				margin: auto;
+			}
+
+			#ignored .row {
+				border: 1px solid #3f3f3f;
+				padding: 5px;
+			}
+
+			#ignored .row > .link {
+				cursor: unset;
+			}
+
+			#ignored .row > .link > * {
+				margin: 0;
+			}
+
 		</style>
 	</head>
 	<body>
 		<button id="screenshot">Take Screenshot</button>
 		<div id="list">
 			<div id="date"></div>
+		</div>
+		<div id="ignored">
 		</div>
 	</body>
 	<script src="./html2canvas.min.js" type="text/javascript"></script>

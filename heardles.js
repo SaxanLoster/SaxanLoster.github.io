@@ -18,19 +18,23 @@ const heardles = [
 ];
 
 const list = document.querySelector( '#list' );
+const ignored = document.querySelector( '#ignored' );
 const screenshotButton = document.querySelector( '#screenshot' );
+let ignoredList = JSON.parse( localStorage.ignoredList || '[]' );
 
 screenshotButton.addEventListener( 'click' , () => {
 	[].forEach.call( list.children , child => {
 		if ( child.id === 'date' ) return;
 
-		const key = child.firstChild.textContent;
+		const key = child.firstElementChild.nextElementSibling.textContent;
 		const info = JSON.parse( localStorage[ `heardle-${key}` ] || '{}' );
 
 		if ( info.guesses == null ) {
 			child.style.display = 'none';
 		}
 	} );
+
+	list.classList.add( 'takingSS' );
 
 	html2canvas( list ).then( canvas => {
 	    // document.body.appendChild( canvas );
@@ -39,6 +43,7 @@ screenshotButton.addEventListener( 'click' , () => {
 		    navigator.clipboard.write( [ item ] ); 
 		} );
 
+		list.classList.remove( 'takingSS' );
 		[].forEach.call( list.children , child => {
 			child.removeAttribute( 'style' );
 		} );
@@ -90,8 +95,12 @@ const xCreateHeardleBox = ( [ name , href ] ) => {
 		localStorage[ lsKey ] = JSON.stringify( { lastAttemptTime: lastAttempt.getTime() } )
 	}
 
+
+	const hidden = ignoredList.some( key => key === name );
+
 	const row = document.createElement( 'div' );
 	row.classList.add( 'row' );
+	if ( hidden ) row.classList.add( 'hidden' );
 
 	const link = document.createElement( 'a' );
 	link.href = href;
@@ -161,10 +170,41 @@ const xCreateHeardleBox = ( [ name , href ] ) => {
 
 	xCalcCorrectAnswers();
 
-	row.appendChild( link )
+	const hideHeardle = document.createElement( 'div' );
+	hideHeardle.className = 'toggleHide';
+	hideHeardle.textContent = hidden ? '+' : '-';
+	hideHeardle.addEventListener( 'click' , () => {
+		row.classList.toggle( 'hidden' );
+
+		ignoredList = JSON.parse( localStorage.ignoredList || '[]' );
+
+		if ( row.classList.contains( 'hidden' ) ) {
+			hideHeardle.textContent = '+';
+			ignored.appendChild( row );
+			ignoredList.push( name );
+		} else {
+			hideHeardle.textContent = '-';
+			list.appendChild( row );
+			const idx = ignoredList.findIndex( key => key === name );
+			ignoredList.splice( idx , 1 );
+		}
+
+		localStorage.ignoredList = JSON.stringify( ignoredList );
+	} )
+
+	row.appendChild( hideHeardle );
+	row.appendChild( link );
 	row.appendChild( guesses );
 
-	return row;
+	return [ hidden , row ];
 };
 
-heardles.map( xCreateHeardleBox ).forEach( li => list.appendChild( li ) );
+heardles
+	.map( xCreateHeardleBox )
+	.forEach( ( [ hidden , li ] ) => {
+		if ( hidden ) {
+			ignored.appendChild( li );
+		} else {
+			list.appendChild( li );
+		}
+	} );
