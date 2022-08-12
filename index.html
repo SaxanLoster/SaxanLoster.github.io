@@ -15,21 +15,29 @@
 
 			a { text-decoration: none; }
 
-			#screenshot {
+			#buttons {
+				display: flex;
+				flex-flow: row nowrap;
+				align-content: center;
+				justify-content: center;
+			}
+
+			#buttons button {
 				background: #2f2f2f;
 				border-radius: 20px;
 				border: 3px outset #afafaf;
 				color: #ffffff;
 				display: block;
+				flex: 0 0 auto;
 				font-size: 18px;
 				line-height: 24px;
-				margin: 0px auto 5px;
-				position: relative;
+				margin: 5px 5px 0;
+				/* position: relative; */
 				top: 10px;
 				width: 160px;
 			}
 
-			#screenshot:hover {
+			#buttons button:hover {
 				background: #8f8f8f;
 				border-color: #3f3f3f;
 				color: #3f5f9f;
@@ -141,6 +149,10 @@
 				margin: auto;
 			}
 
+			#ignored.hidden {
+				display: none;
+			}
+
 			#ignored .row {
 				border: 1px solid #3f3f3f;
 				padding: 5px;
@@ -157,11 +169,14 @@
 		</style>
 	</head>
 	<body>
-		<button id="screenshot">Take Screenshot</button>
+		<div id="buttons">
+			<button id="screenshot">Take Screenshot</button>
+			<button id="toggleVisible">Show Ignored Heardles</button>
+		</div>
 		<div id="list">
 			<div id="date"></div>
 		</div>
-		<div id="ignored">
+		<div id="ignored" class="hidden">
 		</div>
 	</body>
 	<script src="./html2canvas.min.js" type="text/javascript"></script>

@@ -36,6 +36,7 @@ const heardles = [
 const list = document.querySelector( '#list' );
 const ignored = document.querySelector( '#ignored' );
 const screenshotButton = document.querySelector( '#screenshot' );
+const toggleVisibleButton = document.querySelector( '#toggleVisible' );
 let ignoredList = JSON.parse( localStorage.ignoredList || '[]' );
 
 screenshotButton.addEventListener( 'click' , () => {
@@ -64,6 +65,10 @@ screenshotButton.addEventListener( 'click' , () => {
 			child.removeAttribute( 'style' );
 		} );
 	} );
+} );
+
+toggleVisibleButton.addEventListener( 'click' , () => {
+	ignored.classList.toggle( 'hidden' );
 } );
 
 const date = document.querySelector( '#date' );
