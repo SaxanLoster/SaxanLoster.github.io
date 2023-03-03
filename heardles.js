@@ -31,6 +31,8 @@ const heardles = [
 	[ 'Metallica' , 'https://heardle-em-all.glitch.me/' ],
 	// [ '' , '' ],
 
+	[ 'Cine 2 Nerdle' , 'https://www.cinenerdle2.app/' ],
+
 ];
 
 const list = document.querySelector( '#list' );
